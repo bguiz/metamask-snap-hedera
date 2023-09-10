@@ -7,7 +7,7 @@
     "url": "https://github.com/bguiz/metamask-snap-hedera.git"
   },
   "source": {
-    "shasum": "aBNxlL0gs47DnQaGxJaHlKRr92eGPvbho6AoUFvBv24=",
+    "shasum": "H7cBM3Lc0sYWM6Z0wzp4DtFMsAl6VCWoBc6V6eYnVQ4=",
     "location": {
       "npm": {
         "filePath": "dist/bundle.js",
@@ -18,7 +18,8 @@
     }
   },
   "initialPermissions": {
-    "endowment:transaction-insight": {}
+    "endowment:transaction-insight": {},
+    "endowment:ethereum-provider": {}
   },
   "manifestVersion": "0.1"
 }

@@ -4,13 +4,16 @@ import { heading, panel, text } from '@metamask/snaps-ui';
 // Handle outgoing transactions
 export const onTransaction: OnTransactionHandler = async ({ transaction }) => {
   console.log('Transaction insights transaction', transaction);
+  const gasPriceHex: string = (await ethereum.request({
+    method: 'eth_gasPrice',
+  })) as string;
+  const gasPrice = parseInt(gasPriceHex || '', 16);
+  console.log('Current gas price', gasPriceHex, gasPrice);
 
   return {
     content: panel([
-      heading('Percent Snap'),
-      text(
-        'This snap will show you what percentage of your ETH transfers are paid in gas fees.',
-      ),
+      heading('Gas price'),
+      text(`The gas fee for this transaction is ${gasPrice}`),
     ]),
   };
 };
