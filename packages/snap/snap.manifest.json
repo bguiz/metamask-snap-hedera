@@ -4,10 +4,10 @@
   "proposedName": "metamask-snap-hedera",
   "repository": {
     "type": "git",
-    "url": "github.com/bguiz/metamask-snap-hedera.git"
+    "url": "https://github.com/bguiz/metamask-snap-hedera.git"
   },
   "source": {
-    "shasum": "eyp4riXi/7n5KnQrx5Ns0GvVDqHKihHJDA8L9oOYABM=",
+    "shasum": "aBNxlL0gs47DnQaGxJaHlKRr92eGPvbho6AoUFvBv24=",
     "location": {
       "npm": {
         "filePath": "dist/bundle.js",
@@ -18,11 +18,7 @@
     }
   },
   "initialPermissions": {
-    "snap_dialog": {},
-    "endowment:rpc": {
-      "dapps": true,
-      "snaps": false
-    }
+    "endowment:transaction-insight": {}
   },
   "manifestVersion": "0.1"
 }
