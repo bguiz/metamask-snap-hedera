@@ -1,0 +1,28 @@
+{
+  "version": "0.1.0",
+  "description": "Metamask Snap for Hedera",
+  "proposedName": "metamask-snap-hedera",
+  "repository": {
+    "type": "git",
+    "url": "github.com/bguiz/metamask-snap-hedera.git"
+  },
+  "source": {
+    "shasum": "eyp4riXi/7n5KnQrx5Ns0GvVDqHKihHJDA8L9oOYABM=",
+    "location": {
+      "npm": {
+        "filePath": "dist/bundle.js",
+        "iconPath": "images/icon.svg",
+        "packageName": "metamask-snap-hedera",
+        "registry": "https://registry.npmjs.org/"
+      }
+    }
+  },
+  "initialPermissions": {
+    "snap_dialog": {},
+    "endowment:rpc": {
+      "dapps": true,
+      "snaps": false
+    }
+  },
+  "manifestVersion": "0.1"
+}
