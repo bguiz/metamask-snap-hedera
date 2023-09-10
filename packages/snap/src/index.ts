@@ -10,10 +10,25 @@ export const onTransaction: OnTransactionHandler = async ({ transaction }) => {
   const gasPrice = parseInt(gasPriceHex || '', 16);
   console.log('Current gas price', gasPriceHex, gasPrice);
 
+  const transactionGas = parseInt(transaction.gas as string, 16);
+  // const currentGasPriceInWei = parseInt(gasPrice ?? '', 16);
+  const maxFeePerGasInWei = parseInt(transaction.maxFeePerGas as string, 16);
+  const maxPriorityFeePerGasInWei = parseInt(
+    transaction.maxPriorityFeePerGas as string,
+    16,
+  );
+  const gasFees = Math.min(
+    maxFeePerGasInWei * transactionGas,
+    (gasPrice + maxPriorityFeePerGasInWei) * transactionGas,
+  );
+  console.log('Current gas fees', gasFees);
+
   return {
     content: panel([
       heading('Gas price'),
-      text(`The gas fee for this transaction is ${gasPrice}`),
+      text(`The gas price for this transaction is ${gasPrice}`),
+      heading('Gas fee'),
+      text(`The gas fees for this transaction is ${gasFees}`),
     ]),
   };
 };
