@@ -23,12 +23,25 @@ export const onTransaction: OnTransactionHandler = async ({ transaction }) => {
   );
   console.log('Current gas fees', gasFees);
 
+  const transactionValueInWei = parseInt(transaction.value as string, 16);
+  const gasFeesPercentage = (gasFees / (gasFees + transactionValueInWei)) * 100;
+  console.log(
+    'Current gas fees as a percentage of transaction value',
+    gasFeesPercentage,
+  );
+
   return {
     content: panel([
       heading('Gas price'),
       text(`The gas price for this transaction is ${gasPrice}`),
       heading('Gas fee'),
       text(`The gas fees for this transaction is ${gasFees}`),
+      heading('Gas percentage'),
+      text(
+        `The gas fees as a percentage value of this transaction is ${gasFeesPercentage.toFixed(
+          2,
+        )}%`,
+      ),
     ]),
   };
 };
