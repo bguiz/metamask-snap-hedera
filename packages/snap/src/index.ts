@@ -1,6 +1,28 @@
 import { OnTransactionHandler } from '@metamask/snaps-types';
 import { heading, panel, text } from '@metamask/snaps-ui';
 
+/**
+ * Obtain hedera account info by querying mirror node
+ *
+ * @param evmAddress - An EVM address for which we want the Hedera account info
+ */
+async function getHederaAcountInfo(evmAddress: string) {
+  const response: Response = await fetch(
+    `https://testnet.mirrornode.hedera.com/api/v1/accounts/${evmAddress}?limit=1&order=asc&transactiontype=cryptotransfer&transactions=false`,
+    {
+      method: 'GET',
+      // headers: {
+      //   accept: 'content-type: application/json',
+      // },
+      // mode: 'no-cors',
+    },
+  );
+  const result: any = (await response.json()) as any;
+  console.log('mirror node result', result);
+  const { account, alias } = result;
+  return { account, alias, evmAddress };
+}
+
 // Handle outgoing transactions
 export const onTransaction: OnTransactionHandler = async ({ transaction }) => {
   console.log('Transaction insights transaction', transaction);
@@ -30,18 +52,31 @@ export const onTransaction: OnTransactionHandler = async ({ transaction }) => {
     gasFeesPercentage,
   );
 
+  const fromAcccountInfo = await getHederaAcountInfo(
+    transaction.from as string,
+  );
+  const toAcccountInfo = await getHederaAcountInfo(transaction.to as string);
+
   return {
     content: panel([
-      heading('Gas price'),
-      text(`The gas price for this transaction is ${gasPrice}`),
-      heading('Gas fee'),
-      text(`The gas fees for this transaction is ${gasFees}`),
-      heading('Gas percentage'),
-      text(
-        `The gas fees as a percentage value of this transaction is ${gasFeesPercentage.toFixed(
-          2,
-        )}%`,
-      ),
+      heading('Sending account'),
+      text(`Account ID: ${fromAcccountInfo.account}`),
+      text(`Account Alias: ${fromAcccountInfo.alias}`),
+      text(`EVM address: ${fromAcccountInfo.evmAddress}`),
+      heading('Receving account'),
+      text(`Account ID: ${toAcccountInfo.account}`),
+      text(`Account Alias: ${toAcccountInfo.alias}`),
+      text(`EVM address: ${toAcccountInfo.evmAddress}`),
+      // heading('Gas price'),
+      // text(`The gas price for this transaction is ${gasPrice}`),
+      // heading('Gas fee'),
+      // text(`The gas fees for this transaction is ${gasFees}`),
+      // heading('Gas percentage'),
+      // text(
+      //   `The gas fees as a percentage value of this transaction is ${gasFeesPercentage.toFixed(
+      //     2,
+      //   )}%`,
+      // ),
     ]),
   };
 };
