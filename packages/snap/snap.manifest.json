@@ -1,7 +1,7 @@
 {
   "version": "0.1.0",
-  "description": "Metamask Snap for Hedera",
-  "proposedName": "metamask-snap-hedera",
+  "description": "This snap surfaces Hedera account insights for the Sender and Receiver of a transaction. ",
+  "proposedName": "Hedera Insights",
   "repository": {
     "type": "git",
     "url": "https://github.com/bguiz/metamask-snap-hedera.git"
