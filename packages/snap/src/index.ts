@@ -63,7 +63,7 @@ export const onTransaction: OnTransactionHandler = async ({ transaction }) => {
       text(`Account ID: ${fromAcccountInfo.account}`),
       text(`Account Alias: ${fromAcccountInfo.alias}`),
       text(`EVM address: ${fromAcccountInfo.evmAddress}`),
-      heading('Receving account'),
+      heading('Receiving account'),
       text(`Account ID: ${toAcccountInfo.account}`),
       text(`Account Alias: ${toAcccountInfo.alias}`),
       text(`EVM address: ${toAcccountInfo.evmAddress}`),
